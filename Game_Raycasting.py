@@ -25,22 +25,20 @@ pg.display.set_caption('Raycasting')
 clock = pg.time.Clock()
 
 # moving direction
-forward = True
+direction = True
 
 while True:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit(0)
-    
-    #Collision Check
-    Physics.checkCollision(forward,player)
-    
 
     Draw.draw(win,player)
     Physics.cast_rays(win,player)
-    Physics.Movement(forward,player)
+    direction = Physics.Movement(player)
 
+    #Collision Check
+    Physics.checkCollision(direction,player)
     clock.tick(30)
     Draw.fpsDisplay(clock,win)
 

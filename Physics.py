@@ -2,7 +2,8 @@ import Constants as CONST
 import pygame as pg
 import math
 
-def Movement(forward,player):
+def Movement(player):
+    forward = True
     # User Input
     keys = pg.key.get_pressed()
     if keys[pg.K_LEFT]: player.player_angle -= 0.1
@@ -16,17 +17,21 @@ def Movement(forward,player):
         player.player_x -= -math.sin(player.player_angle) * 5
         player.player_y -= math.cos(player.player_angle) * 5
 
+    return forward
+
 def checkCollision(forward,player):
     col = int(player.player_x / CONST.TILE_SIZE)
     row = int(player.player_y / CONST.TILE_SIZE)
     square = row * CONST.MAP_SIZE + col
     if CONST.MAP[square] == '#':
         if forward:
-            player.player_x -= -math.sin(player.player_angle) * 5
-            player.player_y -= math.cos(player.player_angle) * 5
+            print("Wall Contact Face")
+            player.player_x -= -math.sin(player.player_angle) * 10
+            player.player_y -= math.cos(player.player_angle) * 10
         else:
-            player.player_x += -math.sin(player.player_angle) * 5
-            player.player_y += math.cos(player.player_angle) * 5
+            print("Wall Contact Back")
+            player.player_x += -math.sin(player.player_angle) * 10
+            player.player_y += math.cos(player.player_angle) * 10
 
 def cast_rays(win,player):
     start_angle = player.player_angle - CONST.HALF_FOV
