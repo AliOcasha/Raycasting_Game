@@ -47,14 +47,17 @@ def cast_rays(win,player):
                                                     CONST.TILE_SIZE - 2))
 
                 pg.draw.line(win, CONST.RAYS, (player.player_x, player.player_y), (target_x, target_y))
-                color = 255 / (1 + depth * depth * 0.0001)
+                redFactor = 200 / (1 + depth * depth * 0.0001)
+                blueFactor = 70 / (1 + depth * depth * 0.0001)
+                greenFactor = 72 / (1 + depth * depth * 0.0001)
+
                 depth *= math.cos(player.player_angle - start_angle)
                                 
                 wall_height = 21000 / (depth + 0.0001)
                 
                 if wall_height > CONST.SCREEN_HEIGHT: wall_height = CONST.SCREEN_HEIGHT 
                 
-                pg.draw.rect(win, (color, color, color), (
+                pg.draw.rect(win, (redFactor, greenFactor, blueFactor), (
                     CONST.SCREEN_HEIGHT + ray * CONST.SCALE,
                     (CONST.SCREEN_HEIGHT / 2) - wall_height / 2,
                      CONST.SCALE, wall_height))
