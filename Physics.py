@@ -25,11 +25,9 @@ def checkCollision(forward,player):
     square = row * CONST.MAP_SIZE + col
     if CONST.MAP[square] == '#':
         if forward:
-            print("Wall Contact Face")
             player.player_x -= -math.sin(player.player_angle) * 10
             player.player_y -= math.cos(player.player_angle) * 10
         else:
-            print("Wall Contact Back")
             player.player_x += -math.sin(player.player_angle) * 10
             player.player_y += math.cos(player.player_angle) * 10
 

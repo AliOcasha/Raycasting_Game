@@ -25,7 +25,7 @@ pg.display.set_caption('Raycasting')
 clock = pg.time.Clock()
 
 # moving direction
-direction = True
+forward = True
 
 while True:
     for event in pg.event.get():
@@ -35,10 +35,10 @@ while True:
 
     Draw.draw(win,player)
     Physics.cast_rays(win,player)
-    direction = Physics.Movement(player)
+    forward = Physics.Movement(player)
 
     #Collision Check
-    Physics.checkCollision(direction,player)
+    Physics.checkCollision(forward,player)
     clock.tick(30)
     Draw.fpsDisplay(clock,win)
 
