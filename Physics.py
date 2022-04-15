@@ -2,6 +2,8 @@ import Constants as CONST
 import pygame as pg
 import math
 
+#Here the Physics of Player and Ray are implemented
+
 def Movement(player):
     forward = True
     # User Input
@@ -33,7 +35,7 @@ def checkCollision(forward,player):
 
 def cast_rays(win,player):
     start_angle = player.player_angle - CONST.HALF_FOV
-    
+    counter = 0
     for ray in range(CONST.CASTED_RAYS):
         for depth in range(CONST.MAX_DEPTH):
             target_x = player.player_x - math.sin(start_angle) * depth
@@ -48,8 +50,9 @@ def cast_rays(win,player):
                                                     row * CONST.TILE_SIZE,
                                                     CONST.TILE_SIZE - 2,
                                                     CONST.TILE_SIZE - 2))
-
-                pg.draw.line(win, CONST.RAYS, (player.player_x, player.player_y), (target_x, target_y))
+                if counter == 0:
+                    pg.draw.line(win, CONST.RAYS, (player.player_x, player.player_y), (target_x, target_y),3)
+                counter += 1
                 redFactor = 200 / (1 + depth * depth * 0.0001)
                 blueFactor = 70 / (1 + depth * depth * 0.0001)
                 greenFactor = 72 / (1 + depth * depth * 0.0001)
@@ -63,8 +66,9 @@ def cast_rays(win,player):
                 pg.draw.rect(win, (redFactor, greenFactor, blueFactor), (
                     CONST.SCREEN_HEIGHT + ray * CONST.SCALE,
                     (CONST.SCREEN_HEIGHT / 2) - wall_height / 2,
-                     CONST.SCALE, wall_height))
-                
+                     CONST.SCALE,
+                      wall_height))
                 break
 
         start_angle += CONST.STEP_ANGLE
+#EOF

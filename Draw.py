@@ -12,7 +12,8 @@ def draw_map(win,player):
                 (col * CONST.TILE_SIZE, row * CONST.TILE_SIZE, CONST.TILE_SIZE - 2, CONST.TILE_SIZE - 2)
             )
 
-    pg.draw.circle(win, CONST.RED, (int(player.player_x), int(player.player_y)), 8)
+    pg.draw.circle(win, CONST.YELLOW, (int(player.player_x), int(player.player_y)),8)
+    
     
 def draw(win,player):
     #Update Draw
